@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+/* background: linear-gradient(to right, #2C5364, #203A43, #0F2027);  */
+background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+
+      }
+
+      .container {
+        
+        padding: 20px 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: linear-gradient(to right, #1f4037, #99f2c8);
+      }
+
+      input[type="date"] {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #fff;
+        color: #000;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      h1 {
+        color: #fff;
+        margin-top: 20px;
+        font-size: 24px;
+      }
+
+      .results {
+        display: flex;
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .result-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        /* background-color: #000; */
+        background: linear-gradient(to right, #1f4037, #99f2c8);
+        color: #fff;
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+        box-shadow: 1px 2px 3px black;
+      }
+
+      .result-box span {
+        font-size: 32px;
+        font-weight: bold;
+      }
+
+      .result-box label {
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <input type="date" id="dob" />
+      <button id="calculate" onclick="calculate()">Calculate</button>
+    </div>
+    <!-- <h1>You Are</h1> -->
+    <div class="results">
+      <div class="result-box">
+        <span id="year">0</span>
+        <label>Years</label>
+      </div>
+      <div class="result-box">
+        <span id="month">0</span>
+        <label>Months</label>
+      </div>
+      <div class="result-box">
+        <span id="day">0</span>
+        <label>Days</label>
+      </div>
+    </div>
+
+    <script>
+      function calculate() {
+        let dob = document.getElementById("dob").value;
+        let yourDob = new Date(dob);
+        let curr = new Date();
+
+        let yourYear = yourDob.getFullYear();
+        let yourMonth = yourDob.getMonth();
+        let yourDay = yourDob.getDate();
+
+        let currYear = curr.getFullYear();
+        let currMonth = curr.getMonth();
+        let currDay = curr.getDate();
+
+        let ageYear = currYear - yourYear;
+        let ageMonth = currMonth - yourMonth;
+        let ageDay = currDay - yourDay;
+
+        if (ageDay < 0) {
+          ageMonth--;
+          ageDay += new Date(currYear, currMonth, 0).getDate();
+        }
+
+        if (ageMonth < 0) {
+          ageYear--;
+          ageMonth += 12;
+        }
+        
+if(ageYear>=0){
+        document.getElementById("year").innerText = ageYear;
+        document.getElementById("month").innerText = ageMonth;
+        document.getElementById("day").innerText = ageDay;
+      }else{
+        alert('You are not borned yet')
+      }
+    }
+    </script>
+  </body>
+</html>
